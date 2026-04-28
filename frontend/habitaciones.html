@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotel Campestre Bruma Viva | Habitaciones</title>
+    <meta name="description" content="Habitaciones y cabañas campestres con diseño cálido, vistas, terraza y opciones familiares o románticas." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body class="min-h-dvh antialiased">
+    <a class="skip-link ring-focus" href="#contenido">Saltar al contenido</a>
+    <div class="bg-motion" aria-hidden="true"></div>
+    <canvas id="fireflies" aria-hidden="true"></canvas>
+
+    <header class="fixed top-4 left-0 right-0 z-50 px-4 transition-all duration-300">
+      <div class="mx-auto max-w-5xl glass rounded-full px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md bg-white/5">
+        <div class="flex items-center justify-between">
+          <a href="./index.html" class="ring-focus flex items-center gap-3 rounded-full px-2 py-1 hover:bg-white/10 transition-colors">
+            <span class="h-10 w-10 rounded-full grid place-items-center shadow-lg"
+              style="background: linear-gradient(135deg, rgba(var(--brand-forest), .9), rgba(var(--brand-sky), .75));">
+              <span class="text-white font-black tracking-tight">BV</span>
+            </span>
+            <div class="leading-tight hidden sm:block">
+              <div class="text-white font-bold text-lg">Bruma Viva</div>
+            </div>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-2 bg-black/20 rounded-full px-2 py-1 border border-white/5">
+            <a data-nav href="./index.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Inicio</a>
+            <a data-nav href="./habitaciones.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Habitaciones</a>
+            <a data-nav href="./servicios.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Servicios</a>
+            <a data-nav href="./contactanos.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Contáctanos</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <a href="./contactanos.html#reservar" class="ring-focus bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-400 hover:to-rose-400 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all transform">
+              Reservar
+            </a>
+          </div>
+        </div>
+
+        <div class="md:hidden pt-2 pb-1 hidden" id="mobile-menu">
+          <nav class="flex flex-col gap-1 bg-black/20 rounded-2xl p-2 border border-white/5">
+            <a data-nav href="./index.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Inicio</a>
+            <a data-nav href="./habitaciones.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Habitaciones</a>
+            <a data-nav href="./servicios.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Servicios</a>
+            <a data-nav href="./contactanos.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Contáctanos</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido" class="mx-auto max-w-6xl px-4">
+      <section class="pt-10 md:pt-16 pb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+          <div class="lg:col-span-12">
+            <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 pill text-sm text-slate-100/90">
+              <span class="h-2 w-2 rounded-full" style="background: rgba(var(--brand-forest), 1)"></span>
+              Habitaciones con luz cálida + materiales tranquilos
+            </div>
+            <h1 class="mt-5 text-3xl md:text-5xl font-black tracking-tight text-white">
+              Elige tu refugio: cabañas, suites y espacios familiares
+            </h1>
+            <p class="mt-4 text-lg text-slate-200/75 leading-relaxed">
+              Filtra por lo que te importa (vista, terraza, familia, pet-friendly) y encuentra la opción ideal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section data-rooms class="pb-14 md:pb-20">
+        <div class="glass rounded-3xl p-5 md:p-8">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <div class="text-white font-semibold">Filtros rápidos</div>
+              <div class="text-sm text-slate-200/70">Mostrando: <span data-rooms-count class="text-slate-100/90">0 opción(es)</span></div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" class="ring-focus pill rounded-full px-4 py-2 text-sm text-slate-100/90" data-filter="vista" aria-pressed="false">
+                Vista
+              </button>
+              <button type="button" class="ring-focus pill rounded-full px-4 py-2 text-sm text-slate-100/90" data-filter="terraza" aria-pressed="false">
+                Terraza
+              </button>
+              <button type="button" class="ring-focus pill rounded-full px-4 py-2 text-sm text-slate-100/90" data-filter="familiar" aria-pressed="false">
+                Familiar
+              </button>
+              <button type="button" class="ring-focus pill rounded-full px-4 py-2 text-sm text-slate-100/90" data-filter="romance" aria-pressed="false">
+                Romance
+              </button>
+              <button type="button" class="ring-focus pill rounded-full px-4 py-2 text-sm text-slate-100/90" data-filter="pet" aria-pressed="false">
+                Pet-friendly
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto max-h-[500px] pr-2">
+            <article data-room data-tags="vista,terraza,romance" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1200px 300px at 20% 20%, rgba(var(--brand-orchid), .35), transparent 60%), radial-gradient(900px 300px at 80% 70%, rgba(var(--brand-sky), .25), transparent 60%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Suite Niebla</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 2 · Vista amplia · Luz tenue nocturna</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Ducha caliente</li>
+                  <li class="pill rounded-xl px-3 py-2">Cama queen</li>
+                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
+                  <li class="pill rounded-xl px-3 py-2">Mini bar</li>
+                </ul>
+              </div>
+            </article>
+
+            <article data-room data-tags="familiar,terraza,pet" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1100px 320px at 10% 40%, rgba(var(--brand-forest), .32), transparent 60%), radial-gradient(900px 300px at 80% 30%, rgba(var(--brand-sunset), .22), transparent 60%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Cabaña Raíz</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 4–5 · Terraza · Pet-friendly</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Cocina básica</li>
+                  <li class="pill rounded-xl px-3 py-2">2 camas</li>
+                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
+                  <li class="pill rounded-xl px-3 py-2">Hamaca</li>
+                </ul>
+              </div>
+            </article>
+
+            <article data-room data-tags="vista,romance" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1000px 320px at 15% 25%, rgba(var(--brand-sunset), .28), transparent 62%), radial-gradient(900px 300px at 75% 75%, rgba(var(--brand-orchid), .22), transparent 60%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Cúpula Estelar</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 2 · Vista cielo · Experiencia única</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Cielo visible</li>
+                  <li class="pill rounded-xl px-3 py-2">Cama queen</li>
+                  <li class="pill rounded-xl px-3 py-2">Calefacción</li>
+                  <li class="pill rounded-xl px-3 py-2">Té nocturno</li>
+                </ul>
+              </div>
+            </article>
+
+            <article data-room data-tags="familiar,vista" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1200px 320px at 35% 20%, rgba(var(--brand-sky), .26), transparent 60%), radial-gradient(900px 300px at 75% 65%, rgba(var(--brand-forest), .22), transparent 62%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Loft Brisa</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 3 · Vista · Espacio abierto</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Escritorio</li>
+                  <li class="pill rounded-xl px-3 py-2">Sofá cama</li>
+                  <li class="pill rounded-xl px-3 py-2">Café de origen</li>
+                  <li class="pill rounded-xl px-3 py-2">Wi‑Fi</li>
+                </ul>
+              </div>
+            </article>
+
+            <article data-room data-tags="terraza,vista,pet" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1200px 320px at 15% 25%, rgba(var(--brand-forest), .24), transparent 62%), radial-gradient(900px 300px at 80% 55%, rgba(var(--brand-sky), .2), transparent 62%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Bungaló Sendero</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 2–3 · Terraza · Pet-friendly</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
+                  <li class="pill rounded-xl px-3 py-2">Vista</li>
+                  <li class="pill rounded-xl px-3 py-2">Kit rutas</li>
+                  <li class="pill rounded-xl px-3 py-2">Ducha</li>
+                </ul>
+              </div>
+            </article>
+
+            <article data-room data-tags="familiar,pet" class="glass rounded-3xl overflow-hidden">
+              <div class="h-44"
+                style="background: radial-gradient(1200px 340px at 30% 20%, rgba(var(--brand-sunset), .22), transparent 62%), radial-gradient(900px 300px at 80% 70%, rgba(var(--brand-orchid), .18), transparent 62%), rgba(2,6,23,.35);">
+              </div>
+              <div class="p-5">
+                <h3 class="text-white font-bold text-lg">Finca Familiar</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Para 6–8 · Pet-friendly · Zonas amplias</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
+                  <li class="pill rounded-xl px-3 py-2">Parqueadero</li>
+                  <li class="pill rounded-xl px-3 py-2">Cocina</li>
+                  <li class="pill rounded-xl px-3 py-2">Sala grande</li>
+                  <li class="pill rounded-xl px-3 py-2">Fogata</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div class="lg:col-span-7 glass rounded-3xl p-6">
+            <h2 class="text-white font-black text-2xl">Comparación rápida</h2>
+            <p class="mt-2 text-slate-200/70">
+              Si quieres una experiencia diferente, prueba la <span class="text-white font-semibold">Cúpula Estelar</span>. Si prefieres comodidad para grupo,
+              elige <span class="text-white font-semibold">Finca Familiar</span>.
+            </p>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div class="pill rounded-2xl p-4">
+                <div class="text-white font-semibold">Pareja</div>
+                <div class="text-slate-200/70 mt-1">Suite Niebla / Cúpula Estelar</div>
+              </div>
+              <div class="pill rounded-2xl p-4">
+                <div class="text-white font-semibold">Familia</div>
+                <div class="text-slate-200/70 mt-1">Cabaña Raíz / Finca Familiar</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5 glass rounded-3xl p-6">
+            <h2 class="text-white font-black text-2xl">Reserva sin fricción</h2>
+            <p class="mt-2 text-slate-200/70">
+              Te respondemos con disponibilidad, precio final y recomendaciones según tu vibra.
+            </p>
+            <div class="mt-5 flex flex-col sm:flex-row gap-3">
+              <a class="ring-focus btn-primary rounded-2xl px-5 py-3 font-semibold text-white text-center" href="./contactanos.html#reservar">
+                Reservar
+              </a>
+              <a class="ring-focus btn-secondary rounded-2xl px-5 py-3 font-semibold text-slate-100/90 text-center" href="./servicios.html#experiencias">
+                Ver experiencias
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pb-10">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="glass rounded-3xl p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <div class="text-white font-semibold">Bruma Viva</div>
+            <div class="text-sm text-slate-200/70">Tu refugio en el campo.</div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a class="ring-focus btn-secondary rounded-2xl px-5 py-3 font-semibold text-slate-100/90 text-center" href="./index.html">
+              Volver a inicio
+            </a>
+            <a class="ring-focus btn-primary rounded-2xl px-5 py-3 font-semibold text-white text-center" href="./contactanos.html#contacto">
+              Contáctanos
+            </a>
+          </div>
+        </div>
+        <div class="mt-4 text-xs text-slate-200/60">
+          © <span id="year"></span> Bruma Viva. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast">
+      <div class="glass rounded-2xl p-4">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div data-toast-title class="text-white font-semibold">Listo</div>
+            <div data-toast-msg class="text-sm text-slate-200/70">Mensaje</div>
+          </div>
+          <button data-toast-close class="ring-focus btn-secondary rounded-xl px-3 py-2 text-xs text-slate-100/90" type="button">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Redes Sociales (Izquierda) -->
+    <div class="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2 p-2">
+      <a href="#" class="glass p-3 rounded-r-2xl rounded-l-none text-slate-200 hover:text-white hover:bg-white/10 transition-colors group" aria-label="Instagram">
+        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 1.76-6.98 6.206-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.2 4.446 2.622 6.006 6.98 6.206 1.28.058 1.687.072 4.947.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-1.76 6.979-6.206.059-1.28.073-1.687.073-4.947s-.014-3.667-.072-4.947c-.196-4.446-2.624-6.006-6.979-6.206-1.28-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="#" class="glass p-3 rounded-r-2xl rounded-l-none text-slate-200 hover:text-white hover:bg-white/10 transition-colors group" aria-label="Facebook">
+        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+      </a>
+    </div>
+
+    <!-- Contacto (Derecha) -->
+    <div class="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2 p-2">
+      <a href="https://wa.me/" class="glass p-3 rounded-l-2xl rounded-r-none text-slate-200 hover:text-green-400 hover:bg-white/10 transition-colors group" aria-label="WhatsApp">
+        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.126.554 4.195 1.606 6.015L.231 24l6.108-1.601c1.745.961 3.716 1.468 5.692 1.468 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.89 17.37c-.173.486-.98.932-1.425.973-.42.039-1.026.136-3.238-.73-2.673-1.045-4.372-3.753-4.505-3.931-.133-.178-1.077-1.436-1.077-2.739 0-1.303.676-1.947.915-2.195.239-.248.519-.31.692-.31.173 0 .346 0 .498.008.16.008.375-.06.568.406.198.481.676 1.65.735 1.768.06.119.098.258.019.416-.079.158-.119.258-.239.397-.119.139-.252.3-.356.406-.119.119-.245.248-.109.486.136.239.605 1.004 1.296 1.621.89.797 1.637 1.045 1.875 1.164.239.119.378.098.519-.06.139-.158.605-.708.768-.952.163-.244.326-.204.545-.119.219.085 1.385.653 1.623.772.239.119.397.178.456.278.06.099.06.574-.113 1.06z"/></svg>
+      </a>
+      <a href="mailto:reservas@brumaviva.com" class="glass p-3 rounded-l-2xl rounded-r-none text-slate-200 hover:text-white hover:bg-white/10 transition-colors group" aria-label="Email">
+         <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/></svg>
+      </a>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+    <script src="./assets/js/main.js" defer></script>
+  </body>
+</html>
