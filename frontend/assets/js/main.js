@@ -425,6 +425,88 @@
   })();
 
   // ============================================================================
+  // CARRUSEL DE IMÁGENES (INDEX)
+  // ============================================================================
+  const carouselSystem = (() => {
+    const track = qs('#image-carousel');
+    if (!track) return null; // Solo se ejecuta si existe el carrusel (en index.html)
+
+    const slides = Array.from(track.children);
+    const nextButton = qs('#next-slide');
+    const prevButton = qs('#prev-slide');
+    const dotsNav = qs('#carousel-indicators');
+    const dots = Array.from(dotsNav.children);
+
+    let currentIndex = 0;
+    let autoPlayInterval;
+
+    const updateCarousel = (index) => {
+      // Mover el contenedor de imágenes
+      track.style.transform = `translateX(-${index * 100}%)`;
+      
+      // Actualizar indicadores (puntos)
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.className = "w-6 h-2.5 rounded-full bg-white transition-all";
+        } else {
+          dot.className = "w-2.5 h-2.5 rounded-full bg-white/50 transition-all hover:bg-white/80";
+        }
+      });
+      
+      currentIndex = index;
+    };
+
+    const moveToNext = () => {
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= slides.length) nextIndex = 0;
+      updateCarousel(nextIndex);
+    };
+
+    const moveToPrev = () => {
+      let prevIndex = currentIndex - 1;
+      if (prevIndex < 0) prevIndex = slides.length - 1;
+      updateCarousel(prevIndex);
+    };
+
+    // Eventos de botones
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        moveToNext();
+        resetAutoPlay(); // Reiniciar el temporizador al hacer click manual
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        moveToPrev();
+        resetAutoPlay();
+      });
+    }
+
+    // Eventos de indicadores (puntos)
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        updateCarousel(index);
+        resetAutoPlay();
+      });
+    });
+
+    // Auto-Play
+    const startAutoPlay = () => {
+      autoPlayInterval = setInterval(moveToNext, 5000); // Cambia cada 5 segundos
+    };
+
+    const resetAutoPlay = () => {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    };
+
+    // Iniciar auto-play
+    startAutoPlay();
+
+  })();
+
+  // ============================================================================
   // AUTENTICACIÓN Y CITAS (INTEGRACIÓN CON NUEVA API)
   // ============================================================================
   const authSystem = (() => {
@@ -449,43 +531,6 @@
         removeToken();
         window.location.href = './index.html';
     };
-
-    // Actualizar UI del Header
-    const updateHeader = () => {
-      const authLinks = qsa('[data-auth-link]'); // Podría haber varios en mobile/desktop
-      const logoutBtns = qsa('[data-logout-btn]');
-
-      if (isAuthenticated()) {
-        const user = getUser();
-        authLinks.forEach(link => {
-          if (user && (user.rol === 'administrador' || user.rol === 'ADMIN')) {
-            link.textContent = "Panel Admin";
-            link.href = "./admin-dashboard.html";
-          } else {
-            link.textContent = "Mis Citas";
-            link.href = "./mis-citas.html";
-          }
-        });
-        logoutBtns.forEach(btn => btn.classList.remove('hidden'));
-      } else {
-        authLinks.forEach(link => {
-          link.textContent = "Iniciar Sesión";
-          link.href = "./login.html";
-        });
-        logoutBtns.forEach(btn => btn.classList.add('hidden'));
-      }
-
-      logoutBtns.forEach(btn => {
-        // Remover event listeners anteriores si se llama múltiple veces
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
-        newBtn.addEventListener('click', () => {
-          logout();
-        });
-      });
-    };
-
-    updateHeader();
 
     // --- Formularios de Autenticación ---
     const loginForm = qs('#login-form');
@@ -883,6 +928,10 @@
         dynamicLinks.forEach(el => el.remove());
 
         if (isAuth && user) {
+          const isAdmin = (user.rol === 'administrador' || user.rol === 'ADMIN');
+          const panelLink = isAdmin ? './admin-dashboard.html' : './mis-citas.html';
+          const panelText = isAdmin ? 'Panel Admin' : 'Mis Citas';
+
           // Agregar botones de usuario logueado
           const authHtml = `
             <div class="auth-dynamic flex items-center gap-4 ml-4">
@@ -893,7 +942,7 @@
                 </div>
                 <span class="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">${user.nombre.split(' ')[0]}</span>
               </a>
-              <a href="./mis-citas.html" class="text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors ml-2">Mis Citas</a>
+              <a href="${panelLink}" class="text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors ml-2">${panelText}</a>
               <button id="btn-logout-desktop" class="text-sm font-medium text-rose-400 hover:text-rose-300 transition-colors ml-2">Cerrar Sesión</button>
             </div>
           `;
@@ -917,6 +966,10 @@
       // Mobile Menu
       if (mobileMenu) {
         if (isAuth && user) {
+          const isAdmin = (user.rol === 'administrador' || user.rol === 'ADMIN');
+          const panelLink = isAdmin ? './admin-dashboard.html' : './mis-citas.html';
+          const panelText = isAdmin ? 'Panel Admin' : 'Mis Citas';
+
           mobileMenu.innerHTML = `
             <a href="./index.html" class="text-2xl font-bold text-white mb-6">Inicio</a>
             <a href="./habitaciones.html" class="text-2xl font-bold text-white mb-6">Habitaciones</a>
@@ -932,7 +985,7 @@
                 </div>
               </div>
               <a href="./perfil.html" class="block text-lg font-medium text-slate-200 hover:text-emerald-400 transition-colors px-2 py-2 hover:bg-white/5 rounded-xl">Mi Perfil</a>
-              <a href="./mis-citas.html" class="block text-lg font-medium text-slate-200 hover:text-emerald-400 transition-colors px-2 py-2 hover:bg-white/5 rounded-xl">Mis Citas</a>
+              <a href="${panelLink}" class="block text-lg font-medium text-slate-200 hover:text-emerald-400 transition-colors px-2 py-2 hover:bg-white/5 rounded-xl">${panelText}</a>
               <button id="btn-logout-mobile" class="w-full text-left text-lg font-medium text-rose-400 hover:text-rose-300 transition-colors px-2 py-2 hover:bg-rose-500/10 rounded-xl">Cerrar Sesión</button>
             </div>
           `;
