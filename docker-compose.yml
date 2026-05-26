@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      # Exponemos el puerto 80 del contenedor (Apache) al puerto 3000 de tu máquina
+      # para mantener la compatibilidad con el frontend que llama a :3000
+      - "3000:80"
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      - JWT_SECRET=super_secret_key_123_must_be_long_enough_for_hs256
+      - DB_HOST=host.docker.internal
+      - DB_NAME=bruma_viva_db
+      - DB_USER=root
+      - DB_PASS=
+      - DB_PORT=3306
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html

@@ -29,7 +29,7 @@
     <title>Hotel Campestre Bruma Viva | Contáctanos</title>
     <meta name="description" content="Contáctanos y reserva tu estadía. Te respondemos con disponibilidad y recomendaciones según tu vibra." />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css?v=2.1" />
   </head>
   <body class="min-h-dvh antialiased">
     <a class="skip-link ring-focus" href="#contenido">Saltar al contenido</a>
@@ -57,6 +57,9 @@
           </nav>
 
           <div class="flex items-center gap-2">
+            <a data-auth-link href="./login.html" class="ring-focus text-sm font-semibold text-slate-200 hover:text-white px-3 py-2 transition-colors hidden sm:block">
+              Iniciar Sesión
+            </a>
             <a href="./contactanos.html#reservar" class="ring-focus bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-400 hover:to-rose-400 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all transform">
               Reservar
             </a>
@@ -69,6 +72,8 @@
             <a data-nav href="./habitaciones.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Habitaciones</a>
             <a data-nav href="./servicios.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Servicios</a>
             <a data-nav href="./contactanos.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Contáctanos</a>
+            <a data-auth-link href="./login.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-emerald-400 hover:bg-white/10">Iniciar Sesión</a>
+            <button data-logout-btn class="text-left ring-focus rounded-xl px-4 py-3 text-sm font-medium text-rose-400 hover:bg-white/10 hidden">Cerrar Sesión</button>
           </nav>
         </div>
       </div>
@@ -249,6 +254,6 @@
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
     </script>
-    <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/main.js?v=2.2" defer></script>
   </body>
 </html>

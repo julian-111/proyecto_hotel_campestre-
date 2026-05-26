@@ -6,7 +6,22 @@
     <title>Hotel Campestre Bruma Viva | Habitaciones</title>
     <meta name="description" content="Habitaciones y cabañas campestres con diseño cálido, vistas, terraza y opciones familiares o románticas." />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css?v=2.1" />
+    <style>
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+    </style>
   </head>
   <body class="min-h-dvh antialiased">
     <a class="skip-link ring-focus" href="#contenido">Saltar al contenido</a>
@@ -34,6 +49,9 @@
           </nav>
 
           <div class="flex items-center gap-2">
+            <a data-auth-link href="./login.html" class="ring-focus text-sm font-semibold text-slate-200 hover:text-white px-3 py-2 transition-colors hidden sm:block">
+              Iniciar Sesión
+            </a>
             <a href="./contactanos.html#reservar" class="ring-focus bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-400 hover:to-rose-400 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all transform">
               Reservar
             </a>
@@ -46,6 +64,8 @@
             <a data-nav href="./habitaciones.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Habitaciones</a>
             <a data-nav href="./servicios.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Servicios</a>
             <a data-nav href="./contactanos.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Contáctanos</a>
+            <a data-auth-link href="./login.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-emerald-400 hover:bg-white/10">Iniciar Sesión</a>
+            <button data-logout-btn class="text-left ring-focus rounded-xl px-4 py-3 text-sm font-medium text-rose-400 hover:bg-white/10 hidden">Cerrar Sesión</button>
           </nav>
         </div>
       </div>
@@ -95,102 +115,112 @@
             </div>
           </div>
 
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto max-h-[500px] pr-2">
-            <article data-room data-tags="vista,terraza,romance" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1200px 300px at 20% 20%, rgba(var(--brand-orchid), .35), transparent 60%), radial-gradient(900px 300px at 80% 70%, rgba(var(--brand-sky), .25), transparent 60%), rgba(2,6,23,.35);">
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto max-h-[700px] pr-2 custom-scrollbar">
+            <!-- Cabaña 1 -->
+            <article data-room data-tags="vista,terraza,romance" class="glass rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-56 relative">
+                <img src="./imagenes/514295947.jpg" alt="Cabaña de madera con terraza" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Suite Niebla</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 2 · Vista amplia · Luz tenue nocturna</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Ducha caliente</li>
-                  <li class="pill rounded-xl px-3 py-2">Cama queen</li>
-                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
-                  <li class="pill rounded-xl px-3 py-2">Mini bar</li>
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-white font-bold text-lg">Cabaña Mirador</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Cabaña · Vista amplia · Terraza y parrilla</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80 mb-4">
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Ducha caliente</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Cama queen</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Terraza</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Mini bar</li>
                 </ul>
+                <div class="mt-auto">
+                  <a href="./mis-citas.html" class="inline-block w-full text-center ring-focus bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl px-4 py-2 transition-colors">Reservar esta cabaña</a>
+                </div>
               </div>
             </article>
 
-            <article data-room data-tags="familiar,terraza,pet" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1100px 320px at 10% 40%, rgba(var(--brand-forest), .32), transparent 60%), radial-gradient(900px 300px at 80% 30%, rgba(var(--brand-sunset), .22), transparent 60%), rgba(2,6,23,.35);">
+            <!-- Cabaña 2 -->
+            <article data-room data-tags="familiar,terraza,pet" class="glass rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-56 relative">
+                <img src="./imagenes/770861082.jpg" alt="Cabaña A-frame con ventanales" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Cabaña Raíz</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 4–5 · Terraza · Pet-friendly</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Cocina básica</li>
-                  <li class="pill rounded-xl px-3 py-2">2 camas</li>
-                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
-                  <li class="pill rounded-xl px-3 py-2">Hamaca</li>
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-white font-bold text-lg">Cabaña de Cristal</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Cabaña · Ventanales panorámicos · Naturaleza</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80 mb-4">
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Cocina básica</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Camas cómodas</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Zona verde</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Hamaca</li>
                 </ul>
+                <div class="mt-auto">
+                  <a href="./mis-citas.html" class="inline-block w-full text-center ring-focus bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl px-4 py-2 transition-colors">Reservar esta cabaña</a>
+                </div>
               </div>
             </article>
 
-            <article data-room data-tags="vista,romance" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1000px 320px at 15% 25%, rgba(var(--brand-sunset), .28), transparent 62%), radial-gradient(900px 300px at 75% 75%, rgba(var(--brand-orchid), .22), transparent 60%), rgba(2,6,23,.35);">
+            <!-- Habitación Parejas 1 -->
+            <article data-room data-tags="vista,romance" class="glass rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-56 relative">
+                <img src="./imagenes/744758609.jpg" alt="Habitación romántica con terraza" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Cúpula Estelar</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 2 · Vista cielo · Experiencia única</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Cielo visible</li>
-                  <li class="pill rounded-xl px-3 py-2">Cama queen</li>
-                  <li class="pill rounded-xl px-3 py-2">Calefacción</li>
-                  <li class="pill rounded-xl px-3 py-2">Té nocturno</li>
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-white font-bold text-lg">Suite Amanecer</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Habitación de parejas · Balcón privado · Romance</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80 mb-4">
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Vista increíble</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Cama queen</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Techo de madera</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Mucha luz</li>
                 </ul>
+                <div class="mt-auto">
+                  <a href="./mis-citas.html" class="inline-block w-full text-center ring-focus bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl px-4 py-2 transition-colors">Reservar habitación</a>
+                </div>
               </div>
             </article>
 
-            <article data-room data-tags="familiar,vista" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1200px 320px at 35% 20%, rgba(var(--brand-sky), .26), transparent 60%), radial-gradient(900px 300px at 75% 65%, rgba(var(--brand-forest), .22), transparent 62%), rgba(2,6,23,.35);">
+            <!-- Habitación Parejas 2 -->
+            <article data-room data-tags="romance,vista" class="glass rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-56 relative">
+                <img src="./imagenes/hotel-sachica-campestre.jpg" alt="Habitación rústica para parejas" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Loft Brisa</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 3 · Vista · Espacio abierto</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Escritorio</li>
-                  <li class="pill rounded-xl px-3 py-2">Sofá cama</li>
-                  <li class="pill rounded-xl px-3 py-2">Café de origen</li>
-                  <li class="pill rounded-xl px-3 py-2">Wi‑Fi</li>
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-white font-bold text-lg">Suite Rústica</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Habitación de parejas · Acogedora · Descanso total</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80 mb-4">
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Diseño en piedra</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Cama muy amplia</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Tranquilidad</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Wi‑Fi</li>
                 </ul>
+                <div class="mt-auto">
+                  <a href="./mis-citas.html" class="inline-block w-full text-center ring-focus bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl px-4 py-2 transition-colors">Reservar habitación</a>
+                </div>
               </div>
             </article>
 
-            <article data-room data-tags="terraza,vista,pet" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1200px 320px at 15% 25%, rgba(var(--brand-forest), .24), transparent 62%), radial-gradient(900px 300px at 80% 55%, rgba(var(--brand-sky), .2), transparent 62%), rgba(2,6,23,.35);">
+            <!-- Habitación Familiar -->
+            <article data-room data-tags="familiar,vista,pet" class="glass rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-56 relative">
+                <img src="./imagenes/casa-de-campo-hote-spa-villa-de-leyva-habitacion-familiar-3.jpg" alt="Habitación familiar espaciosa" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Bungaló Sendero</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 2–3 · Terraza · Pet-friendly</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Terraza</li>
-                  <li class="pill rounded-xl px-3 py-2">Vista</li>
-                  <li class="pill rounded-xl px-3 py-2">Kit rutas</li>
-                  <li class="pill rounded-xl px-3 py-2">Ducha</li>
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-white font-bold text-lg">Suite Familiar</h3>
+                <p class="mt-1 text-sm text-slate-200/70">Habitación familiar · Para 4–6 personas · Amplia</p>
+                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80 mb-4">
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Múltiples camas</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>TV pantalla plana</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Techo de vigas</li>
+                  <li class="pill rounded-xl px-3 py-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Salida al jardín</li>
                 </ul>
+                <div class="mt-auto">
+                  <a href="./mis-citas.html" class="inline-block w-full text-center ring-focus bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl px-4 py-2 transition-colors">Reservar familiar</a>
+                </div>
               </div>
             </article>
 
-            <article data-room data-tags="familiar,pet" class="glass rounded-3xl overflow-hidden">
-              <div class="h-44"
-                style="background: radial-gradient(1200px 340px at 30% 20%, rgba(var(--brand-sunset), .22), transparent 62%), radial-gradient(900px 300px at 80% 70%, rgba(var(--brand-orchid), .18), transparent 62%), rgba(2,6,23,.35);">
-              </div>
-              <div class="p-5">
-                <h3 class="text-white font-bold text-lg">Finca Familiar</h3>
-                <p class="mt-1 text-sm text-slate-200/70">Para 6–8 · Pet-friendly · Zonas amplias</p>
-                <ul class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-100/80">
-                  <li class="pill rounded-xl px-3 py-2">Parqueadero</li>
-                  <li class="pill rounded-xl px-3 py-2">Cocina</li>
-                  <li class="pill rounded-xl px-3 py-2">Sala grande</li>
-                  <li class="pill rounded-xl px-3 py-2">Fogata</li>
-                </ul>
-              </div>
-            </article>
           </div>
         </div>
 
@@ -289,6 +319,6 @@
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
     </script>
-    <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/main.js?v=2.2" defer></script>
   </body>
 </html>

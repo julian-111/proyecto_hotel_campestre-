@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotel Campestre Bruma Viva | Iniciar Sesión</title>
+    <meta name="description" content="Inicia sesión para gestionar tus reservas y citas en Bruma Viva." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css?v=2.1" />
+  </head>
+  <body class="min-h-dvh antialiased">
+    <a class="skip-link ring-focus" href="#contenido">Saltar al contenido</a>
+    <div class="bg-motion" aria-hidden="true"></div>
+    <canvas id="fireflies" aria-hidden="true"></canvas>
+
+    <header class="fixed top-4 left-0 right-0 z-50 px-4 transition-all duration-300">
+      <div class="mx-auto max-w-5xl glass rounded-full px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md bg-white/5">
+        <div class="flex items-center justify-between">
+          <a href="./index.html" class="ring-focus flex items-center gap-3 rounded-full px-2 py-1 hover:bg-white/10 transition-colors">
+            <span class="h-10 w-10 rounded-full grid place-items-center shadow-lg"
+              style="background: linear-gradient(135deg, rgba(var(--brand-forest), .9), rgba(var(--brand-sky), .75));">
+              <span class="text-white font-black tracking-tight">BV</span>
+            </span>
+            <div class="leading-tight hidden sm:block">
+              <div class="text-white font-bold text-lg">Bruma Viva</div>
+            </div>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-2 bg-black/20 rounded-full px-2 py-1 border border-white/5">
+            <a data-nav href="./index.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Inicio</a>
+            <a data-nav href="./habitaciones.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Habitaciones</a>
+            <a data-nav href="./servicios.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Servicios</a>
+            <a data-nav href="./contactanos.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Contáctanos</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <a data-auth-link href="./login.html" class="ring-focus bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 hover:scale-105 transition-all transform">
+              Iniciar Sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido" class="mx-auto max-w-md px-4 flex flex-col justify-center min-h-[80vh] pt-24">
+      <div class="glass rounded-3xl p-8 shadow-2xl">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-black tracking-tight text-white">Bienvenido</h1>
+          <p class="mt-2 text-sm text-slate-200/70">Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <form id="login-form" class="space-y-6">
+          <div data-field data-invalid="false" class="space-y-2">
+            <label class="text-sm font-medium text-slate-100/90" for="login-email">Correo Electrónico</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" required
+              class="w-full rounded-2xl px-4 py-3 bg-slate-950/40 border border-slate-400/20 text-slate-100 ring-focus transition-all focus:border-emerald-500/50"
+              placeholder="tu@correo.com" />
+            <div data-error class="text-xs text-orange-200/90"></div>
+          </div>
+
+          <div data-field data-invalid="false" class="space-y-2">
+            <label class="text-sm font-medium text-slate-100/90" for="login-password">Contraseña</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required
+              class="w-full rounded-2xl px-4 py-3 bg-slate-950/40 border border-slate-400/20 text-slate-100 ring-focus transition-all focus:border-emerald-500/50"
+              placeholder="••••••••" />
+            <div data-error class="text-xs text-orange-200/90"></div>
+          </div>
+
+          <button type="submit" class="w-full ring-focus bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 rounded-2xl px-5 py-3.5 font-bold text-white shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transition-all transform hover:-translate-y-0.5">
+            Ingresar
+          </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm text-slate-200/70">
+          ¿No tienes una cuenta? 
+          <a href="./registro.html" class="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors underline-offset-4 hover:underline">
+            Regístrate aquí
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <div id="toast" class="toast">
+      <div class="glass rounded-2xl p-4">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div data-toast-title class="text-white font-semibold">Listo</div>
+            <div data-toast-msg class="text-sm text-slate-200/70">Mensaje</div>
+          </div>
+          <button data-toast-close class="ring-focus btn-secondary rounded-xl px-3 py-2 text-xs text-slate-100/90" type="button">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/main.js?v=2.3" defer></script>
+  </body>
+</html>

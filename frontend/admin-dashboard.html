@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotel Campestre Bruma Viva | Panel de Administración</title>
+    <meta name="description" content="Panel de administración para gestionar agendamientos." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <style>
+      /* Ajustes específicos para el scroll del calendario si hay muchos eventos */
+      .calendar-cell-events::-webkit-scrollbar {
+        width: 4px;
+      }
+      .calendar-cell-events::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .calendar-cell-events::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="min-h-dvh antialiased flex flex-col">
+    <a class="skip-link ring-focus" href="#contenido">Saltar al contenido</a>
+    <div class="bg-motion fixed inset-0 z-[-1]" aria-hidden="true"></div>
+    <canvas id="fireflies" class="fixed inset-0 z-[-1]" aria-hidden="true"></canvas>
+
+    <header class="fixed top-4 left-0 right-0 z-50 px-4 transition-all duration-300">
+      <div class="mx-auto max-w-7xl glass rounded-full px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md bg-white/5">
+        <div class="flex items-center justify-between">
+          <a href="./index.html" class="ring-focus flex items-center gap-3 rounded-full px-2 py-1 hover:bg-white/10 transition-colors">
+            <span class="h-10 w-10 rounded-full grid place-items-center shadow-lg"
+              style="background: linear-gradient(135deg, rgba(var(--brand-forest), .9), rgba(var(--brand-orchid), .75));">
+              <span class="text-white font-black tracking-tight">AD</span>
+            </span>
+            <div class="leading-tight hidden sm:block">
+              <div class="text-white font-bold text-lg">Panel Admin</div>
+            </div>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-2 bg-black/20 rounded-full px-2 py-1 border border-white/5">
+            <a data-nav href="./index.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all">Ver Sitio</a>
+            <a data-nav href="./admin-dashboard.html" class="ring-focus rounded-full px-4 py-2 text-sm font-medium text-white bg-white/10 transition-all">Calendario</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <button data-logout-btn class="ring-focus bg-slate-800 hover:bg-slate-700 rounded-full px-5 py-2.5 text-sm font-bold text-slate-200 transition-all">
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+
+        <div class="md:hidden pt-2 pb-1 hidden" id="mobile-menu">
+          <nav class="flex flex-col gap-1 bg-black/20 rounded-2xl p-2 border border-white/5">
+            <a data-nav href="./index.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Ver Sitio</a>
+            <a data-nav href="./admin-dashboard.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-white bg-white/10">Calendario</a>
+            <button data-logout-btn class="text-left ring-focus rounded-xl px-4 py-3 text-sm font-medium text-rose-400 hover:bg-white/10">Cerrar Sesión</button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido" class="flex-1 mx-auto w-full max-w-7xl px-4 pt-28 pb-10 flex flex-col h-screen">
+      
+      <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">
+        
+        <!-- BARRA LATERAL: FILTROS -->
+        <aside class="w-full lg:w-72 flex-shrink-0 flex flex-col gap-4">
+          <div class="glass rounded-3xl p-6 h-full overflow-y-auto">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+              Filtros
+            </h2>
+
+            <form id="admin-filters" class="space-y-6">
+              
+              <!-- Filtro de Estado -->
+              <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-slate-200 uppercase tracking-wider">Estado</h3>
+                <div class="space-y-2">
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" name="status" value="CREADA" checked class="w-4 h-4 rounded border-white/20 bg-white/5 text-orange-500 focus:ring-orange-500 focus:ring-offset-slate-900" />
+                    <span class="text-sm text-slate-300 group-hover:text-white transition-colors">Creada / Pendiente</span>
+                  </label>
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" name="status" value="CONFIRMADA" checked class="w-4 h-4 rounded border-white/20 bg-white/5 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-900" />
+                    <span class="text-sm text-slate-300 group-hover:text-white transition-colors">Confirmada</span>
+                  </label>
+                </div>
+              </div>
+
+              <hr class="border-white/10" />
+
+              <!-- Filtro de Servicios -->
+              <div class="space-y-3">
+                <h3 class="text-sm font-semibold text-slate-200 uppercase tracking-wider">Filtro Rápido</h3>
+                <div class="space-y-2" id="filter-services-container">
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" name="has_room" value="yes" checked class="w-4 h-4 rounded border-white/20 bg-white/5 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900" />
+                    <span class="text-sm text-slate-300 group-hover:text-white transition-colors">Con Habitación</span>
+                  </label>
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" name="has_room" value="no" checked class="w-4 h-4 rounded border-white/20 bg-white/5 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900" />
+                    <span class="text-sm text-slate-300 group-hover:text-white transition-colors">Solo Servicio</span>
+                  </label>
+                </div>
+              </div>
+
+            </form>
+
+            <div class="mt-8 p-4 rounded-2xl bg-white/5 border border-white/10">
+              <div class="text-xs text-slate-400">Total filtrado:</div>
+              <div class="text-2xl font-black text-white mt-1" id="admin-total-count">0</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL: LISTA DE AGENDAMIENTOS -->
+        <section class="flex-1 glass rounded-3xl p-4 md:p-6 flex flex-col min-h-[600px]">
+          
+          <!-- Encabezado y controles de lista -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+            <h1 class="text-2xl md:text-3xl font-black text-white" id="admin-month-title">Agendamientos</h1>
+            
+            <!-- Buscador o acciones rápidas -->
+            <div class="w-full sm:w-auto relative">
+              <input type="text" id="admin-search" placeholder="Buscar por cliente o ID..." class="w-full sm:w-64 rounded-xl px-4 py-2 bg-black/20 border border-white/10 text-sm text-slate-100 ring-focus focus:border-emerald-500/50 transition-colors" />
+              <svg class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+          </div>
+
+          <!-- Contenedor de la lista -->
+          <div class="flex-1 flex flex-col overflow-hidden bg-black/10 rounded-2xl border border-white/5">
+            
+            <!-- Cabecera de la tabla (Desktop) -->
+            <div class="hidden md:grid grid-cols-12 gap-4 p-4 border-b border-white/10 bg-white/5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+              <div class="col-span-2">Fecha y Hora</div>
+              <div class="col-span-3">Cliente</div>
+              <div class="col-span-3">Servicios</div>
+              <div class="col-span-2">Habitaciones</div>
+              <div class="col-span-2 text-right">Estado / Acción</div>
+            </div>
+
+            <!-- Lista de items (Inyectados por JS) -->
+            <div id="admin-list-container" class="flex-1 overflow-y-auto custom-scrollbar p-2 md:p-0 space-y-2 md:space-y-0">
+              <!-- Los items se inyectarán aquí -->
+              
+              <!-- Estado de Carga -->
+              <div id="admin-loading" class="flex flex-col items-center justify-center py-20 opacity-50">
+                <div class="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+                <p class="text-slate-200">Cargando agendamientos...</p>
+              </div>
+
+              <!-- Estado Vacío -->
+              <div id="admin-empty" class="hidden flex-col items-center justify-center py-20 text-center">
+                <div class="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                </div>
+                <p class="text-slate-200 font-medium text-lg">No se encontraron citas</p>
+                <p class="text-slate-400 text-sm mt-1">Intenta ajustando los filtros de búsqueda.</p>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Modal para Detalles de la Cita -->
+    <div id="admin-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="admin-modal-overlay"></div>
+      <div class="relative glass rounded-3xl p-6 md:p-8 w-full max-w-md transform scale-95 transition-transform duration-300" id="admin-modal-content">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-xl font-bold text-white" id="modal-service">Servicio</h3>
+          <button id="admin-modal-close" class="text-slate-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <div class="space-y-4 text-sm text-slate-200">
+          <div class="flex gap-2"><strong class="text-white w-24">Cliente:</strong> <span id="modal-client"></span></div>
+          <div class="flex gap-2"><strong class="text-white w-24">Habitaciones:</strong> <span id="modal-rooms"></span></div>
+          <div class="flex gap-2"><strong class="text-white w-24">Fecha:</strong> <span id="modal-date"></span></div>
+          <div class="flex gap-2"><strong class="text-white w-24">Hora:</strong> <span id="modal-time"></span></div>
+          <div class="flex gap-2 items-center">
+            <strong class="text-white w-24">Estado:</strong> 
+            <span id="modal-status" class="px-2 py-1 rounded-md text-xs font-bold"></span>
+          </div>
+        </div>
+        <div class="mt-6 flex gap-3">
+          <button id="admin-modal-confirm-btn" class="flex-1 ring-focus bg-emerald-500 hover:bg-emerald-400 text-white rounded-xl py-2 font-semibold transition-colors shadow-lg shadow-emerald-500/20">
+            Marcar Confirmada
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/main.js?v=2.3" defer></script>
+  </body>
+</html>

@@ -34,6 +34,9 @@
           </nav>
 
           <div class="flex items-center gap-2">
+            <a data-auth-link href="./login.html" class="ring-focus text-sm font-semibold text-slate-200 hover:text-white px-3 py-2 transition-colors hidden sm:block">
+              Iniciar Sesión
+            </a>
             <a href="./contactanos.html#reservar" class="ring-focus bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-400 hover:to-rose-400 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all transform">
               Reservar
             </a>
@@ -46,6 +49,8 @@
             <a data-nav href="./habitaciones.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Habitaciones</a>
             <a data-nav href="./servicios.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Servicios</a>
             <a data-nav href="./contactanos.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-slate-200 hover:bg-white/10">Contáctanos</a>
+            <a data-auth-link href="./login.html" class="ring-focus rounded-xl px-4 py-3 text-sm font-medium text-emerald-400 hover:bg-white/10">Iniciar Sesión</a>
+            <button data-logout-btn class="text-left ring-focus rounded-xl px-4 py-3 text-sm font-medium text-rose-400 hover:bg-white/10 hidden">Cerrar Sesión</button>
           </nav>
         </div>
       </div>
@@ -140,45 +145,10 @@
               <h2 class="text-2xl font-black text-white">Servicios principales</h2>
               <p class="mt-2 text-slate-200/70">Expande cada servicio para ver cómo funciona.</p>
 
-              <div class="mt-6 space-y-3">
-                <div class="pill rounded-2xl p-4">
-                  <button class="ring-focus w-full text-left flex items-center justify-between gap-4" data-acc-trigger aria-expanded="false" aria-controls="acc-1" type="button">
-                    <span class="text-white font-semibold">Piscina templada al atardecer</span>
-                    <span class="text-slate-200/70 text-sm">Ver</span>
-                  </button>
-                  <div id="acc-1" hidden class="mt-3 text-sm text-slate-200/70 leading-relaxed">
-                    Temperatura cómoda, iluminación suave y zona de reposo. Recomendación: 30–45 min para descanso real.
-                  </div>
-                </div>
-
-                <div class="pill rounded-2xl p-4">
-                  <button class="ring-focus w-full text-left flex items-center justify-between gap-4" data-acc-trigger aria-expanded="false" aria-controls="acc-2" type="button">
-                    <span class="text-white font-semibold">Fogata segura con kit</span>
-                    <span class="text-slate-200/70 text-sm">Ver</span>
-                  </button>
-                  <div id="acc-2" hidden class="mt-3 text-sm text-slate-200/70 leading-relaxed">
-                    Te damos encendido controlado, recomendaciones para evitar humo excesivo y un kit de snacks para compartir.
-                  </div>
-                </div>
-
-                <div class="pill rounded-2xl p-4">
-                  <button class="ring-focus w-full text-left flex items-center justify-between gap-4" data-acc-trigger aria-expanded="false" aria-controls="acc-3" type="button">
-                    <span class="text-white font-semibold">Rutas campestres señalizadas</span>
-                    <span class="text-slate-200/70 text-sm">Ver</span>
-                  </button>
-                  <div id="acc-3" hidden class="mt-3 text-sm text-slate-200/70 leading-relaxed">
-                    Rutas cortas y medianas con puntos de pausa. Incluye “tarjeta de orientación” por si te desvías.
-                  </div>
-                </div>
-
-                <div class="pill rounded-2xl p-4">
-                  <button class="ring-focus w-full text-left flex items-center justify-between gap-4" data-acc-trigger aria-expanded="false" aria-controls="acc-4" type="button">
-                    <span class="text-white font-semibold">Desayuno de origen</span>
-                    <span class="text-slate-200/70 text-sm">Ver</span>
-                  </button>
-                  <div id="acc-4" hidden class="mt-3 text-sm text-slate-200/70 leading-relaxed">
-                    Café local, fruta fresca y opciones ligeras. Si tienes restricciones, lo adaptamos con anticipación.
-                  </div>
+              <div id="dynamic-services-list" class="mt-6 space-y-3">
+                <div class="text-center py-8 opacity-50">
+                  <div class="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin mb-4 mx-auto"></div>
+                  <p class="text-slate-200">Cargando servicios disponibles...</p>
                 </div>
               </div>
             </div>
